@@ -1,0 +1,216 @@
+import random
+import time
+import sys
+from logos import nave
+from capituloI import cap1
+import io
+from capituloII import cap2
+
+"""
+Módulos importados
+"""
+
+texto = io.open("rpgzada.txt", "r", encoding="utf-8")
+linhas = texto.readlines()
+
+"""
+chamando o arquivo de texto, r= modo de leitura, enconding utf-8 pra não dar problema com acentos
+"""
+
+
+def typing(message):
+    print("")
+    for word in message:
+        time.sleep(random.choice([0.3, 0.11, 0.08, 0.07, 0.07, 0.07, 0.06, 0.06, 0.05, 0.01]))
+        sys.stdout.write(word)
+        sys.stdout.flush()
+    time.sleep(.1)
+    return ""
+
+
+"""
+Define a função typing, onde as palavras vão ter um tempo de espera (time.sleep) aleatorizados (random.choice) para 
+serem escritas
+"""
+
+nome = input("Qual o seu nome?")        # pede pro user o nome
+idade = input("Qual a sua idade?")      # pede pro user a idade
+const = input("Qual será sua constelação? (1, 2 ou 3)")     # pede pro user escolher sua constelação
+
+if const == "1":
+    typing("Bem vindo a Nebula Xae-12")
+    const1 = "Nebula Xae-12"
+if const == "2":
+    typing("Bem vindo a Estrela Shencial")
+    const2 = "Estrela Schencial"
+if const == "3":
+    typing("Bem vindo ao Convênio da Terra")
+    const3 = "Convênio da Terra"
+
+"""
+Condições oara mostrar determinadas mensagens dependendo da escolha da constelação do user
+"""
+
+print()
+print(cap1)         # Mostra a ascii-art do arquivo capituloI.py
+time.sleep(5)       # Tempo de espera para a próxima linha de código
+print()             # Mostra uma linha em branco
+print(nave)         # Mostra a ascii-art do arquivo logos.py
+
+
+def displayintro():
+    typing("<" + nome + "> " + linhas[0])
+    time.sleep(1)
+    typing("<" + nome + "> " + linhas[1])
+    print()
+
+
+"""
+Define a função displayintro, que vai mostrar as determinadas linhas do arquivo de texto rpgzada.txt e colocar um tempo
+entre as linhas e uma linha em branco no final
+"""
+
+
+def choosepath():
+    path = input(linhas[2])
+    if path == str("2"):
+        typing(linhas[3])
+        time.sleep(2)
+        typing(linhas[4])
+        time.sleep(2)
+        typing(linhas[5])
+        print()
+        time.sleep(2)
+        typing("<" + nome + "> " + linhas[6])
+        print()
+        typing(linhas[7])
+        print()
+        typing(linhas[8])
+        time.sleep(2)
+        typing("<Policial> " + nome + "?")
+        print()
+        typing("<" + nome + "> Eu mesmo senhor.")
+        time.sleep(1)
+        print()
+        typing("<" + nome + "> Tem algo errado?")
+        print()
+        typing(linhas[9])
+        print()
+        typing("...")
+        print()
+        typing("...")
+        print()
+        if const == "1":
+            typing("<" + nome + "> " + linhas[10])
+            typing(linhas[11] + "de Nebula Xae-12")
+            print()
+        if const == "2":
+            typing("<" + nome + "> " + linhas[10])
+            typing(linhas[11] + "da Estrela Schencial")
+            print()
+        if const == "3":
+            typing("<" + nome + "> " + linhas[10])
+            typing(linhas[11] + "do Convênio da Terra")
+            print()
+        typing(linhas[15])
+        typing("<" + nome + "> " + linhas[16])
+    else:
+        typing(linhas[12])
+        typing("...")
+        typing(linhas[13])
+        typing("...")
+        typing(linhas[14])
+        typing("...")
+        print()
+        playagain = input("Quer tentar de novo? (sim ou não)")
+        if playagain == str("sim"):
+            choosepath()
+            choosepath2()
+            choosepath3()
+
+
+"""
+Define a função choosepath onde vai pedir a primeira resposta do user (path = input) e a partir da resposta irá seguir 
+a história de um jeito
+O while loop é pra quando o user perde, recebe a opção de jogar de novo
+"""
+
+
+def choosepath2():
+    path2 = input(typing(linhas[17]))
+    if path2 == str("sim"):
+        typing(linhas[18])
+        typing(linhas[19] + nome + ".")
+        typing("<" + nome + "> " + linhas[20])
+        typing(linhas[21])
+        print()
+        typing(linhas[22] + nome)
+    if path2 == str("não"):
+        path3 = input(typing(linhas[23]))
+        if path3 == str("sim"):
+            typing(linhas[18])
+            typing(linhas[19] + nome + ".")
+            print()
+            typing("<" + nome + "> " + linhas[20])
+            typing(linhas[21])
+            typing(linhas[22] + nome + ".")
+            choosepath3()
+        while path3 == str("não"):
+            path4 = input(typing(linhas[23]))
+            if path4 == str("sim"):
+                typing(linhas[18])
+                typing(linhas[19] + nome + ".")
+                print()
+                typing("<" + nome + "> " + linhas[20])
+                typing(linhas[21])
+                typing(linhas[22] + nome + ".")
+                choosepath3()
+
+
+"""
+Define a função choosepath2 onde vai ser apresentado ao user a segunda escolha dele e seguir o jogo a partir dessa 
+escolha
+"""
+
+
+def choosepath3():
+    print()
+    typing("<" + nome + "> " + linhas[24])
+    typing(linhas[25])
+    typing("<" + nome + "> " + linhas[26])
+    typing(linhas[27])
+    path5 = input(typing(linhas[28]))
+    if path5 == str("sim"):
+        typing(linhas[29] + nome + "!")
+        typing(linhas[30])
+        typing("...")
+        typing("...")
+        print()
+        print(cap2)
+        time.sleep(5)
+    if path5 == str("não"):
+        typing(linhas[31])
+        typing(linhas[32])
+        print()
+        print(cap2)
+        time.sleep(5)
+
+
+"""
+Define a função choosepath3 onde vai ser apresentado ao user a segunda escolha dele e seguir o jogo a partir dessa 
+escolha
+"""
+"""
+FIM DO CAPÍTULO I
+"""
+
+displayintro()
+choosepath()
+choosepath2()
+choosepath3()
+again = input("Quer jogar de novo? (sim ou s)")
+while again == "sim" or again == "s":
+    displayintro()
+    choosepath()
+    choosepath2()
+    choosepath3()

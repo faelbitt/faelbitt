@@ -1,0 +1,33 @@
+Puxa, essa nave que passou do meu lado estava com pressa...
+Mas é bom estar em casa de novo, não vejo a hora de assistir a corrida de planadores quânticos
+Você quer ir pra casa ou assistir a corrida primeiro? (1 ou 2):
+Você vai a caminho...
+Passa por alguns conhecidos que não via faz tempo, mas estavam todos de máscara...
+E quem não estava de máscara, botava só quando chegava perto de você.
+O que será que houve?
+Você acha estranho mas segue o seu caminho...
+Mas quando está quase chegando ao seu destino, uma tropa de policiais espaciais lhe pedem para descer...
+<Policial> Preciso que me siga até o conselho galático.
+Será que ninguém vai me explicar o que está acontecendo aqui?
+Você chega até a sede do conselho galático e é posto na frente do juiz da constelação
+Enquanto você está seguindo o seu caminho, o combustível da sua nave acaba...
+E você cai...
+E morre né, tchau.
+<Juiz> Precisamos que você deixe a constelação imediatamente, sem acordos e sem demora.
+Mas o que houve? Eu acabei de chegar, não sei de nada e ninguém me explica!
+<Juiz> No seu último trabalho, recebemos a notícia de que você teve contato com Raey Omo, está certo? (sim ou não)
+<Juiz> Parece que este Krekiano está sendo procurado por todas as 3 grandes constelações...
+<Juiz> E todos que tiveram contato com ele, ou seja, você
+Mas o que ele...
+<Juiz> Podem levá-lo rapazes.
+<Policial> Vamos indo
+<Juiz> Você está ciente que está na frente de um juiz da federação da constelação, certo? Gostaria de mudar sua resposta? (sim ou não)
+Espera! Por que tudo isso??? O que tem eu ter encontrado Raey?
+<Juiz> Raey está infectado pelos infestados, e como sabemos os infestados ja tomaram conta de dois planetas por completo.
+Mas eu apenas troquei duas frases com ele, eu não estou infectado!
+<Juiz> Sinto muito mas não podemos arriscar mais um planeta. Levem-no logo!
+Os policiais lhe pegam pelo braço, você quer tentar resistir? (sim ou não)
+Não acredito! Você realmente resistiu aos policiais espaciais
+você só pode ser maluco! Mas deu certo! Agora corra para sua casa, e pegue seu planador antigo lá.
+<Policial> Vamos indo seu infestado. Você vai ser levado até a prisão de contenção a oeste do asteróide Y32.
+<Policial> Ficara lá até o Juiz determinar que seu estado não é mais de infectado, ou seja, praticamente pra sempre.

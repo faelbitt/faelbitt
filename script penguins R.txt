@@ -1,0 +1,171 @@
+## OCN7027 - ANALISE DE DADOS OCEANOGRÁFICOS - 2021
+# Profa. Carla Bonetti
+
+
+# PRÁTICA: ANALISE ESTATISITICA - PALMER PENGUINS DATASET
+
+setwd("C:/Users/rafae/PycharmProjects/untitled")
+
+install.packages("palmerpenguins")
+install.packages("explore")
+
+library(palmerpenguins)
+library(explore)
+
+library(devtools)
+library(ggpubr)
+library(dplyr)
+library(car)
+library(tidyverse)
+library(broom)
+library(ggplot2)
+library(ggfortify)
+library(corrplot)
+
+
+#DATASET
+?penguins
+
+#A tabela de dados já está incluida no pacote "palmerpenguins".
+#Assim, depois de instalar este pacote basta visualizá-la.
+
+penguins
+
+#Transformar em csv
+#"penguins" é o mesmo que df nos scripts anteriores
+penguins <- read.csv(url("https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv"))
+
+penguins %>% describe()
+
+
+# Explore os dados
+str(penguins)
+summary (penguins)
+
+
+# Remover NAs
+penguins <- penguins %>%                     #precisa do pacote dplyer
+  filter(flipper_length_mm > 0)              #dataframe passa a ter 342 casos
+
+
+#Se quiser usar ano como variável categórica
+penguins$year<-as.factor(penguins$year)
+
+
+#Normalidade
+shapiro.test(penguins$body_mass_g)
+# Se as distribuições não se ajustarem a Curva Normal, assuma que o numero de casos
+# é grande o suficiente para permitir violar este pressuposto (Teorema Central do Limite)
+
+#REPRESENTAÇÕES GRÁFICAS
+
+penguins %>%
+  explore_all()
+
+penguins %>%
+  explore_all(target = species)
+
+
+# Grafico de Colunas
+
+penguins %>%
+  count(species) %>%
+  ggplot() + geom_col(aes(x = species, y = n, fill = species)) +
+  geom_label(aes(x = species, y = n , label = n)) +
+  scale_fill_manual(values = c("darkgray","darkblue","cyan4")) +
+  theme_minimal() +
+  labs(title = 'Abundancia absoluta de pinguins por especie', x = "espécies", y = "no. de individuos")
+
+
+#Histogramas
+1 + 3.3*log(342)    #formula de Sturges(k)
+
+hist(penguins$body_mass_g,
+     main = "Histograma",
+     xlab = "Massa corporal (g)",
+     breaks = 20)
+
+#OU
+ggplot(penguins,aes(x=flipper_length_mm))+geom_histogram(aes(y = ..density..),bins=20, fill='darkgray', color='black')+
+  stat_function(fun=dnorm, args=list(mean=mean(penguins$flipper_length_mm), sd=sd(penguins$flipper_length_mm)))
+
+
+#Diagrama de dispersão
+penguins %>% explore(flipper_length_mm, body_mass_g , target = species)
+
+# ANOVA FATOR UNICO (ONE WAY)
+
+#Teste de Levene (HOMOCEDASTICIDADE)  Rejeita H0 (igualdade das variâncias) se p<0.05
+leveneTest(flipper_length_mm ~ species, data = penguins)
+
+#Se variâncias IGUAIS
+res.aov <- aov(flipper_length_mm ~ species, data = penguins)
+  #Resumo
+summary(res.aov)
+
+  #Teste POST HOC de TUKEY para comparações multiplas
+TukeyHSD(res.aov)
+
+
+#Se variâncias diferentes
+oneway.test(flipper_length_mm ~ species, data = penguins, var.equal = FALSE)
+
+  #Teste POST HOC teste t emparelhado (t test pairwise)
+pairwise.t.test(penguins$flipper_length_mm, penguins$species,
+                p.adjust.method = "BH", pool.sd = FALSE)
+
+
+#Diagrama de Caixa
+
+my_comparisons <- list( c("Adelie", "Gentoo"), c("Adelie", "Chinstrap"), c("Gentoo", "Chinstrap") )
+#se for ANOVA FATORIAL criar duas listas (uma para cada fator) e gerar dois gráficos)
+
+ggline(penguins, x = "species", y = "flipper_length_mm", add = c("mean_ci"),   #plota a média e o intervalo de confiança
+       order = c("Adelie", "Gentoo", "Chinstrap"),
+       ylab = "comprimento da nadadeira (mm)", xlab = "Espécies", color = "black")+
+  stat_compare_means(comparisons = my_comparisons, method = "t.test", label = "p.signif" )+   # Add pairwise comparisons p-value
+  stat_compare_means(label.y = 180,   #altura no eixo Y onde será apresentado o nivel de significancia
+                     hide.ns = FALSE,   #apresenta o simbolo ns (não significativo)
+                     method = "anova")
+
+
+# CORRELAÇÃO DE PEARSON
+
+  # Diagrama de dispersão
+ggscatter(penguins, x = "flipper_length_mm", y = "body_mass_g",
+          add = "reg.line", conf.int = FALSE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "comprimento da nadadeira", ylab = "peso corporal")
+
+cor.test(penguins$flipper_length_mm, penguins$body_mass_g, method=c("pearson"))
+
+#OPCIONAIS
+
+
+#colorir cada especie de pinguin de uma cor no gráficos
+
+pCol <- c('#057076', '#ff8301', '#bf5ccb')         # verde, laranja, lilás
+names(pCol) <- c('Gentoo', 'Adelie', 'Chinstrap')
+plot(penguins, col = pCol[penguins$species], pch = 19)
+
+par(mfrow = c(1, 2))    # plota dois graficos no mesmo painel
+par(mfrow = c(2, 2))    #plota quatro gráficos no mesmo painel
+
+
+
+#REFERENCES
+
+#https://www.r-bloggers.com/2020/07/basic-data-analysis-with-palmerpenguins/
+#https://www.r-bloggers.com/2020/06/penguins-dataset-overview-iris-alternative-in-r/
+#https://cran.r-project.org/web/packages/explore/vignettes/explore_penguins.html
+#https://towardsdatascience.com/penguins-dataset-overview-iris-alternative-9453bb8c8d95
+
+#Data were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER.
+#https://www.programmingwithr.com/penguins-dataset-overview-iris-alternative-in-r/
+
+### To cite palmerpenguins in publications use:
+##
+##   Gorman KB, Williams TD, Fraser WR (2014) Ecological Sexual Dimorphism
+##   and Environmental Variability within a Community of Antarctic
+##   Penguins (Genus Pygoscelis). PLoS ONE 9(3): e90081.
+##   https://doi.org/10.1371/journal.pone.0090081

@@ -1,0 +1,78 @@
+## OCN7027 - ANALISE DE DADOS OCEANOGRÁFICOS - 2021
+# Profa. Carla Bonetti
+
+#PRATICA: TESTES DE NORMALIDADE
+
+#Copiar o endereço da pasta e inverter as barras 
+setwd("C:/Users/carla/Dropbox/OCN7108 Analise de Dados 2021_1/R docs")
+
+# Verificar diretório de trabalho
+getwd()
+
+# Ler dados CSV (MS DOS) - criando uma tabela de dados - dataframe (df)
+df <-read.csv2("TestesNormalidade.csv")  
+
+# Lista de variaveis do dataframe: ID  N_1	N_plat  N_ASneg	 N_lept	 ASneg	AS_pos	Lept	Bimodal"
+
+#Pacotes necessarios para essa prática:
+install.packages("ggplot2")    #usado para construir gráficos 
+library(ggplot2)   
+
+install.packages("nortest")    #usado para os testes de Normalidade
+library(nortest)     
+
+
+#Observando dataframe
+str(df)   
+
+
+# se necessário ajustar a descrição das variáveis
+df$N_1<-as.numeric(df$N_1)
+df$N_plat<-as.numeric(df$N_plat)
+df$N_ASneg<-as.numeric(df$N_ASneg)
+df$N_lept<-as.numeric(df$N_lept)
+df$ASneg<-as.numeric(df$ASneg)
+df$AS_pos<-as.numeric(df$AS_pos)
+df$Lept<-as.numeric(df$Lept)
+
+#ESTATISTICA DESCRITIVA
+summary(df)
+sd(df$N_1)
+
+#HISTOGRAMAS
+
+#Fórmula de Sturges  (log n) = numero de casos
+1+3.3*log10(50)
+
+# plotar o histograma
+hist( df$N_1, plot=TRUE, col="darkblue", nclass = 7, main = "HISTOGRAMA N_1", xlab = "Intervalo de Classe (unidade)", ylab ="Frequencia absoluta")
+
+
+# OU plotar Histograma com curva de densidade Normal   (substituir por (y = ..count..)) para freq absoluta
+
+ggplot(df,aes(x=N_1))+geom_histogram(aes(y = ..density..),bins=7, fill='darkgray', color='black')+
+  stat_function(fun=dnorm, args=list(mean=mean(df$N_1), sd=sd(df$N_1)))
+
+# OU plotar uma grafico QQ-Plot (quantil-quantil plot)
+qqnorm(df$N_1, pch = 1, frame = FALSE, main = "Q-Q plot N_1")
+qqline(df$N_1, col = "steelblue", lwd = 2)
+
+
+# Teste de Normalidade de Shapiro-Wilk (W)
+shapiro.test(df$N_1)
+
+# Teste de Normalidade de Lilliefors (Kolmogorov-Smirnov) 
+lillie.test(df$N_1)
+
+# Teste de Normalidade de Anderson-Darling 
+ad.test(df$N_1)
+
+
+# salvar todo o ambiente de trabalho
+save.image() #ou
+save.image(file = "Pratica_Normalidade.RData")
+
+#REFERENCIA
+#http://www.sthda.com/english/wiki/wiki.php?title=ggplot2-histogram-easy-histogram-graph-with-ggplot2-r-package
+#http://www.sthda.com/english/wiki/normality-test-in-r
+# http://www.sthda.com/english/wiki/qq-plots-quantile-quantile-plots-r-base-graphs

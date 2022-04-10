@@ -1,0 +1,330 @@
+import time
+import sys
+print("Hello World")  # print the information
+# Variables and Arithmetic operators
+# =====================================================================================================================
+age1 = 12  # variable age1
+age2 = 18  # variable age2
+print(age1 + age2)  # sum the variables and show the results
+print("======================================================================================================")
+print(age1 - age2)  # subtract the variables and show the results
+print("======================================================================================================")
+print(age1 * age2)  # multiply the variables and show the results
+print("======================================================================================================")
+print(age1 / age2)  # divide the variables and show the results
+print("======================================================================================================")
+print(age1 % age2)  # show the remainder of the variables
+print("======================================================================================================")
+# Strings and Placeholders
+# =====================================================================================================================
+lastname = "Bittencourt"  # variable lastname
+firstname = "Rafael"  # variable firstname
+print(firstname + lastname)  # show the combination of the variables without a space
+print("======================================================================================================")
+print(firstname + " " + lastname)  # show the combination of the variables with a space
+print("======================================================================================================")
+print("Olá" * 10)  # show the string 10 times
+print("======================================================================================================")
+sentence = "Rafael gosta muito de pizza e jogar com os amigos"  # variable sentence
+print(sentence[0:6])  # show the word Rafael from the variable sentence, getting the info from index 0 to 6
+print("======================================================================================================")
+print(sentence[:4])  # show the word Rafa from the variable sentence, getting the info from the beginning to index 4
+print("======================================================================================================")
+print(sentence[:-14])  # show the sentence variable subtracting the last 14 indexes [] means splicing
+print("======================================================================================================")
+name = "rafael"  # variable name
+print(name + " tem 19 anos")  # show the variable value + the string
+print("======================================================================================================")
+sent = "%s tem 19 anos"  # variable sent
+print(sent % name)  # show the substitution of %s with the variable name
+print("======================================================================================================")
+sent = "%s %s é muito legal"  # variable sent
+print(sent % ("Rafael", "Bittencourt"))  # show the substitution of %s with the strings in brackets
+print("======================================================================================================")
+sentence1 = "%s tem %d anos de idade."  # %s is for strings and %d is for a number
+print(sentence1 % ("Rafael", 19))  # show the substitution of %s and %d as Rafael and 19
+print("======================================================================================================")
+# Lists and Dictionaries
+# =====================================================================================================================
+shoplist = ["pizza", "macarrão", "refrigerante"]  # array
+print(shoplist)  # show the items on the array
+print("======================================================================================================")
+print(shoplist[0])  # show the first item of the array
+print("======================================================================================================")
+print(shoplist[1])  # show the second item of the array
+print("======================================================================================================")
+print(shoplist[2])  # show the third item of the array
+print("======================================================================================================")
+print(shoplist[0:2])  # show the first 2 items of the array (splicing)
+print("======================================================================================================")
+shoplist.append("lasagna")  # add a string to the array
+shoplist[1] = "coxinha"  # substitute the second item of the array for coxinha
+print(shoplist)  # show the list
+print("======================================================================================================")
+del shoplist[1]  # delete an object in the list (arrays)
+print(shoplist)  # show the array
+print("======================================================================================================")
+print(len(shoplist))  # show the length of the array
+print("======================================================================================================")
+shoplist2 = ["pão", "arroz", "feijão"]  # array
+print(shoplist2)  # show the array
+print("======================================================================================================")
+print(shoplist + shoplist2)  # sum the items of the shoplist and shoplist2
+print("======================================================================================================")
+print(shoplist * 2)  # multiply the items for 2
+print("======================================================================================================")
+listnum = [1, 2, 3, 7, 12, 27, 34, 76]  # numbers array
+print(max(listnum))  # show the bigger value of the array
+print("======================================================================================================")
+print(min(listnum))  # show the smaller value of the array
+print("======================================================================================================")
+# Dictionary
+# =====================================================================================================================
+friends = {"rafa": 19, "alice": 20, "greg": 17, "gabs": 17}  # {} dictionary
+print(friends)
+print("======================================================================================================")
+print(friends["rafa"])  # show the value linked to my name
+print("======================================================================================================")
+friends["gabs"] = 18  # update the value of that name
+print(friends)
+print("======================================================================================================")
+del friends["greg"]  # delete one of the names on the dictionary
+print(friends)
+print("======================================================================================================")
+# Tuples
+# =====================================================================================================================
+tup = ("laranja", "banana")  # tuples are like an array but not editable
+print(tup)
+print("======================================================================================================")
+print(len(tup))
+print("======================================================================================================")
+# Conditional Statement
+# =====================================================================================================================
+if 5 > 3:  # if (se) condition
+    print("Hello")  # if that condition is true, Hello will be shown
+if 3 < 2:  # if condition
+    print("hello")  # if that condition is true, hello will be shown
+else:  # else (se não) condition
+    print("the condition was not true")  # if the condition above is false, the sentence will be shown
+print("======================================================================================================")
+# Relational operators (<= minor than, >= greater than, == equal than, != different of)
+age = 19  # variable saying that the age is 19
+if age < 13:  # condition saying that if the age is less than 13...
+    print("você é novo")  # show the following message
+elif 13 >= age <= 18:  # if the age is greater than 13 but less than 18...
+    print("você é um adolescente")  # show the following message
+else:  # and if the age is anything but that on the previous statements...
+    print("você é adulto")  # show this message
+print("======================================================================================================")
+if 5 > 3 and 2 > 1:  # with and, both the statements need to be true
+    print("Hi")
+print("======================================================================================================")
+if 5 > 3 or 2 < 1:  # with or, at least one of the statements need to be true
+    print("Hi")
+print("======================================================================================================")
+# For Loops
+# =====================================================================================================================
+list1 = ["apples", "bananas", "cherries"]
+tup1 = (13, 12, 15)
+for item in list1:  # with for, it will print each string of the variable list1 assigning them as "item"
+    print(item)
+print("======================================================================================================")
+for number in tup1:  # with for, it will print each value of the tuple assigning them as "number"
+    print(number)
+print("======================================================================================================")
+for x in range(1, 11):  # range function, will print every value between that range specified
+    print(x)
+print("======================================================================================================")
+for x in range(1, 21, 2):  # the third number specified will be the number will be sum
+    print(x)  # this will print number 1 and keep sum 2 to it until 20 (all the odd numbers)
+print("======================================================================================================")
+for x in range(0, 21, 2):
+    print(x)  # this will print number 0 and keep sum 2 to it until 20 (all the even numbers)
+print("======================================================================================================")
+for x in range(0, 5):
+    for y in range(0, 10):  # nested for loops
+        print(x * y)  # this will print the table of 4 until 36
+print("======================================================================================================")
+# While Loops
+# =====================================================================================================================
+c = 0
+while c < 5:
+    print(c)  # while c+1 being c = 0, is less than 5, the value of c+1 will be printed
+    c = c + 1
+print("======================================================================================================")
+c = 0
+while c < 5:
+    print(c)  # c = 0 will be printed until c + 1 = 5
+    if c == 3:  # but in this lin we specified that if c becomes 3...
+        break  # it needs to stop before it reaches 5, break stops the loop
+    c = c + 1
+print("======================================================================================================")
+c = 0
+while c < 5:
+    c = c + 1
+    if c == 3:
+        continue
+    print(c)  # this will print c + 1 until reaches 5, but if reaches 3, it will skip the printing of the value...
+# and continue printing the next values
+print("======================================================================================================")
+c = 0
+while c < 5:
+    c = c + 1
+    if c == 3:
+        pass  # pass are used when the function need to have a syntax somewhere but it won't work for nothing
+    print(c)
+print("======================================================================================================")
+# Try and Except
+# =====================================================================================================================
+try:                    # if the condition is true, the program will run normally
+    if name > 7:
+        print("Hello")
+except:                # but if something went wrong this is the new execution
+    print("Algo deu errado")
+print("======================================================================================================")
+# Functions
+# =====================================================================================================================
+
+
+def helloworld():           # define a function called helloworld
+    print("Hello World")    # this function print Hello World
+
+
+helloworld()                # this activate the function
+
+
+def greeting(names):
+    print("Hi" + " " + names + "!")
+
+
+greeting("rafa")           # this activate the function saying that names is rafa
+
+
+def add(num1, num2):
+    print(num1 + num2)
+
+
+add(10, 15)
+
+
+def returnadd(num1, num2):
+    return num1 + num2
+
+
+summ = returnadd(12, 34)
+
+print(summ)
+print("======================================================================================================")
+# In-Built Functions
+# =====================================================================================================================
+print(abs(34))      # absolute, return the positive number
+print(abs(-23))
+print("======================================================================================================")
+print(bool(0))      # return true to everything greater than 0
+print(bool(100))
+print("======================================================================================================")
+print(dir("hello"))     # says what can you do with that string
+print("======================================================================================================")
+sent = "hello"
+print(help(sent.upper))     # explain what something does
+print("======================================================================================================")
+sent = "print(7)"
+print(eval(sent))      # execute the string as a code
+print(exec(sent))      # does the same as eval but for more complex codes
+print("======================================================================================================")
+a = 1
+print(str(a))       # print the value as a string
+print(float(a))     # print the value as a floating value
+print(int(a))       # print the value as the own value
+print("======================================================================================================")
+# Object-Oriented Programming
+# =====================================================================================================================
+
+
+class Person:           # create a class
+    pass
+
+
+p = Person()
+print(p)
+
+
+class Person:
+    def getname(self):          # self store the information
+        print("rafa")
+
+    def getage(self):
+        print("19")
+
+
+p = Person()
+print(p.getname())      # call the function
+print(p.getage())
+
+
+class Person:
+    def __init__(self, names, ages):        # construct a function with attributes
+        self.names = names
+        self.ages = ages
+
+    def getnames(self):
+        print("seu nome é " + self.names)
+
+    def getages(self):
+        print("sua idade é " + self.ages)
+
+
+p1 = Person("rafa", "19")
+print(p1.getnames())
+print(p1.getages())
+print("======================================================================================================")
+# Inheritance
+# =====================================================================================================================
+
+
+class Pais:
+    def __init__(self):
+        print("essa é a classe de pais")
+
+    def parentfunc(self):
+        print("essa é a function dos pais")
+
+
+p = Pais()
+print(p)
+print(p.parentfunc())
+
+
+class Crianca(Pais):            # class crianca inherits the pais class functions
+    def __init__(self):
+        super().__init__()
+        print("essa é a classe da criança")
+
+    def childfunc(self):
+        print("essa é a function da criança")
+
+
+c = Crianca()
+print(c)
+print(c.childfunc())
+print("======================================================================================================")
+# Input
+# =====================================================================================================================
+
+# =====================================================================================================================
+def delay_print(s):
+    for c in s:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(0.25)
+
+
+delay_print("hello world")
+print("======================================================================================================")
+# Reading a text
+# =====================================================================================================================
+arq = open("texto.txt", "r")     # variable with the text
+linhas = arq.readlines()    # variable linhas telling the code to read the lines of the variable arq
+print(linhas[0])        # print a specified line of th texto.txt
+print(linhas[2])
+print(linhas[1])

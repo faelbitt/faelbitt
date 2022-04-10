@@ -1,0 +1,157 @@
+# OCN7108 UFSC - ANALISE DE DADOS OCEANOGRÁFICOS
+
+#INTRODUÇÃO AO R
+
+#Apresentação do Ambiente RStudio
+
+# O que é, como criar e salvar um Script no R (file.R) (opção de salvar como arquivo.txt)
+
+#Copiar o endereço da pasta e inverter as barras 
+setwd("C:/Users/dflor/Downloads/Monitoria Análise- Rstudio")
+
+# Verificar diretório de trabalho
+getwd()
+
+# Ler dados CSV (MS DOS) - criando uma tabela de dados (dataframe (df)
+df <-read.csv2("Treino1.csv")  #(usaremos essa função no curso)
+
+# OU 
+df <- read.csv("Treino1.csv", 
+               header = TRUE, sep = ";", dec= ",")
+
+# Ler dados salvo como TXT
+Treino1 <-read.table(file.choose(),header=T)  # ao usar essa função o R vai abrir uma janela para indicar a pasta de orgigem do arquivo)
+Treino1
+
+# Função "HELP"
+help.search("read.table")   #help.search("nome da função")
+#OU 
+??read.table                # ??nome da função
+
+#Observando dataframe
+str(df)
+head(df)
+names(df)
+
+#Tipos de objetos no R (ver explicações nas referencias)
+#dataframe
+#matrix
+#vector (numerico) ou factor (categórico)
+#list 
+#funções
+
+
+# se necessário transformar os objetos (coerção de objetos)
+df$VAR_A<-as.numeric(df$VAR_A)
+df$VAR_A<-as.factor(df$VAR_A)
+
+
+#se necessário remover linhas ou colunas do dataframe
+df1<-df[(-45:-49),] # informando a linha que será removida  (se for um unica linha usar df[(-45),] )
+df1<-df[,(-2:-3)] # informando a coluna que será removida  (se for um unica linha usar df[,(-3)] )
+df1<-df[c(-48,-607,-155,-216,-181),] # utilizando o concatenate "c" e informando as linhas que serão removidas
+
+# Operações aritmeticas no R
+8+10
+8-3
+8/2
+8*2
+8^2  # 5 elevado ao quadrado
+sqrt(16) #raiz quadrada
+log(16)  #logaritmo (log natural)
+log10(16) # log na base 10
+((8+10-3)/3)*2
+
+#Operações usando as colunas (variáveis) ou linhas (casos) do dataframe
+  # Criar uma nova coluna com os valores da coluna original transformados 
+df$VAR_A2 <- (df$VAR_A^(2) - 1)/2     
+
+## REPRESENTAÇÕES GRÁFICAS
+
+#para escolher as cores dos graficos
+colours()
+
+#Grafico de Pontos e Linhas
+plot(df$ID,df$VAR_A,xlab="Casos",ylab="VAR_A unidade" ,pch=1, main="Título do gráfico", col="blue", cex.axis=0.9, cex.lab=0.9)
+lines(df$ID,df$VAR_A,xlab="Casos",ylab="VAR_A unidade" ,pch=1, main="Título do gráfico", col="red")
+abline(h=mean(df$VAR_A))  #adiciona uma linha representando o valor médio da distribuição
+
+#grafico de colunas
+barplot(df$VAR_A,df$ID,xlab="Casos",ylab="VAR_A unidade" ,pch=1, main="Título do gráfico",col="gray" )
+
+#criar um gráfico setorial sem usar os dados do dataframe (criando novos objetos - vetores)  
+grupos <- c(74,58,30,12,5)
+names(grupos) <- c("GrA","GrB","GrC","GrD","Outros")
+pie(grupos)
+porc <-round(grupos*100/sum(grupos),2)
+rotulos<-paste("(",porc,"%)",sep="")
+pie(grupos, main="Titulo do Grafico",labels=rotulos, col=rainbow(5))
+legend(1,1,names(grupos),col = rainbow(5),pch=rep(20,6))
+
+#plotar varios graficos simultaneamente  (OPCIONAL)
+par(mfrow = c(2,2))   # c(número de linhas,número de colunas da janela)
+par(mfrow = c(1,1)) #para interromper esta configuração
+
+
+# Salvar gráficos como imagem ou como pdf
+
+
+##SÍNTESE ESTATISTICA DESCRITIVA
+summary(df)
+
+## COMO INSTALAR PACOTES - Alternativas
+
+  # 1) Packages  >> Install  >> Install from: Repository CRAN; Packages: inserir nome do pacote; ... >> Install
+  # 2) Usando comando:  install.packages("nomedopacote")
+install.packages("ggplot2")
+  # 3)Usando Devtools - quando o pacote não está disponível no CRAN (rede onde estão instalados a maioria dos pacotes), mas em outro diretório aberto (por exemplo GITHUB)
+        #se é a primeira, precisa antes instalar o pacote Devtools  -- install.packages("devtools")
+install_github('ramnathv/rCharts') # exemplo: ramnathv é o usuário do Github que criou o pacote rCharts
+
+## ABRIR UM PACOTE
+    #uma vez instalado na sua biblioteca do R, o pacote precisa ser berto (chamado)
+library("ggplot2")   #library("nomedopacote")
+
+#Exemplos de gráficos usando GGPLOT2
+
+ggplot(df) +
+  geom_point(aes(x = VAR_A, y = VAR_B), color = "blue")
+
+
+ggplot(df) +
+  geom_line(aes(x = ID, y = VAR_A), color = "red")
+
+  
+ggplot(df) +
+  geom_line(aes(x = ID, y = VAR_A), color = "red")+
+  geom_line(aes(x = ID, y = VAR_B), color = "blue")
+
+
+#Exportando dados em CSV
+library(readr)
+write_delim(df, "Treino_mod.csv", delim = ";", na = "-")
+
+
+# salvar todo o ambiente de trabalho
+save.image() #ou
+save.image(file = "Treino1.RData")
+
+
+#REFERENCIAS
+
+#Como instalar o R
+  #https://youtu.be/8LnZNC4hxdQ
+
+#Leitura da Dados CSV no R
+  # https://youtu.be/Xdtq82tMLqI     
+
+#Outras videoaulas do curso de Estatistica da UFF
+  #http://www.estatisticacomr.uff.br/?page_id=38
+
+#Apostila Introdução ao R 
+  # https://moodle.ufsc.br/mod/resource/view.php?id=3118400
+
+#Pacote GGPLOT2
+#https://livro.curso-r.com/8-1-o-pacote-ggplot2.html
+
+

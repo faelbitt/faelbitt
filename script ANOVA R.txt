@@ -1,0 +1,128 @@
+## OCN7027 - ANALISE DE DADOS OCEANOGRÁFICOS - 2021
+# Profa. Carla Bonetti
+
+#PRATICA: ANOVA
+
+install.packages("devtools")   
+install.packages("ggplot2")    #usado para construir gráficos 
+install.packages("ggpubr")      #associado ao ggplot - representações graficas
+install.packages("dplyr")       #calcula estatisticas por grupos + ferramenta %>%
+install.packages("car")        #testes de Levene e ANOVA #se necessário instalar pacote FSA
+
+library(devtools)
+library(ggplot2) 
+library(ggpubr)
+library(dplyr)
+library(car)
+
+#Copiar o endereço da pasta e inverter as barras 
+setwd("C:/Users/carla/Dropbox/OCN7108 Analise de Dados 2021_1/R docs")
+
+# Verificar diretório de trabalho
+getwd()
+
+# Ler dados CSV (MS DOS) - criando uma tabela de dados - dataframe (df)
+df <-read.csv2("Pratica_ANOVA.csv")  
+
+#Observando dataframe
+str(df)
+head(df)
+names(df)
+summary(df)
+
+#Se necessário
+df$AREA_A<-as.factor(df$AREA)
+df$DEP1<-as.numeric(df$DEP1)
+
+# Representação gráfica (estatistica descritiva)
+
+ggline(df, x = "AREA", y = "DEP1", 
+       add = c("mean_ci"),
+       ylab = "VARIAVEL", xlab = "AREAS DE ESTUDO", 
+       color = "black",
+       title =  "Média e intervalo de confiança")
+
+
+#TESTES DE NORMALIDADE
+shapiro.test(df$DEP1)
+
+
+# TESTAR HOMOCEDASTICIDADE DENTRO DE CADA GRUPO
+leveneTest(df$DEP1,df$AREA)   # Se não houver homocedasticidade, pode-se usar o teste "Welch one-way" test" 
+                                #como alternativa a ANOVA
+
+
+# ANALISE DE VARIÂNCIA - ONE-WAY (UM FATOR)
+res.aov <- aov(DEP1 ~ TEMPO, data = df)
+#Resumo
+summary(res.aov)
+
+
+#Teste de TUKEY para comparações multiplas
+TukeyHSD(res.aov)
+
+
+
+
+# ANALISE DE VARIÂNCIA FATORIAL 
+#Modelo aditivo (assume-se que não há interação entre os dois fatores - ou seja, são fatoers independentes)
+# Se há interação entre os fatores (efeito sinergético), subsituir + por * (DEP ~ fator 1 * fator2)
+res.anova2 <- aov(DEP1 ~ AREA + METODO, data = df)
+summary(res.anova2)
+
+
+#TESTE DE NORMALIDADE DOS RESIDUOS
+# Extract the residuals
+anova2_residuals <- residuals(object = res.anova2)
+# Run Shapiro-Wilk test
+shapiro.test(x = anova2_residuals )
+#Alternativamente use o Grafico de Probabilidade Normal (quantiles of the residuals are plotted against the quantiles of the normal distribution)
+plot(res.anova2, 2)
+
+
+
+### REPRESENTAR GRAFICAMENTE O RESULTADO DA ANOVA
+
+GR_AREA <- list( c("AREA 1", "AREA 2"), c("AREA 1", "AREA 3"), c("AREA 2", "AREA 3") )
+GR_METODO <- list( c("METODO 1", "METODO 2"), c("METODO 1", "METODO 3"), c("METODO 2", "METODO 3") )
+GR_TEMPO <- list( c("TEMPO 1", "TEMPO 2"), c("TEMPO 1", "TEMPO 3"), c("TEMPO 1", "TEMPO 4"),c("TEMPO 2", "TEMPO 3"), c("TEMPO 2", "TEMPO 4"), c("TEMPO 3", "TEMPO 4") )
+
+ggboxplot(df, x = "TEMPO", y = "DEP1",
+          color = "TEMPO", palette = "jco")+ 
+  stat_compare_means(comparisons = GR_TEMPO, method = "t.test", label = "p.signif")+   # Add pairwise comparisons p-value
+  stat_compare_means(label.y = 0,     #altura no eixo Y onde será apresentado o nivel de significancia
+                     hide.ns = FALSE,   #apresenta o simbolo ns (não significativo)
+                     method = "anova")    #t.test, t.test, t.test, wilcox.test, wilcox.test, wilcox.test, anova, kruskal.test
+# "p.signif" (shows the significance levels), "p.format" (shows the formatted p value)
+
+
+#Convenção para significancia estatistica:
+# ns: p > 0.05   *: p <= 0.05      **: p <= 0.01    ***: p <= 0.001     ****: p <= 0.0001
+
+
+# ANOVA FATORIAL 
+#Grafico de interação de fatores
+interaction.plot(x.factor     = df$METODO,
+                 trace.factor = df$AREA, 
+                 response     = df$DEP1, 
+                 fun = mean,
+                 type="b",
+                 col=c("black","red","green"),  ### Colors for levels of trace var.
+                 pch=c(19, 17, 15),             ### Symbols for levels of trace var.
+                 fixed=TRUE,                    ### Order by factor order in data
+                 leg.bty = "0")
+
+
+
+
+# salvar todo o ambiente de trabalho
+save.image() #ou
+save.image(file = "Pratica_19ago_ANOVA.RData")
+
+#Carregando arquivos salvos
+load("teste.RData")
+
+#REFERENCIAS
+
+#http://www.sthda.com/english/wiki/one-way-anova-test-in-r
+#http://www.sthda.com/english/wiki/two-way-anova-test-in-r

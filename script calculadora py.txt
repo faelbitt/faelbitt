@@ -1,0 +1,240 @@
+import math
+
+"""
+Esse é um projeto de calculadora
+"""
+
+
+def calcular():
+    operation = input('''
+    Qual operação você deseja realizar?
+    ====================================
+    + para soma;
+    - para subtração;
+    * para multiplicação;
+    / para divisão;
+    prox para nenhuma das anteriores.
+    ====================================
+    ''')
+    if operation == "prox":
+        areas()
+    if operation == "+":
+        numero1 = float(input('Escreva o primeiro número: '))
+        numero2 = float(input('Escreva o segundo número: '))
+        print("{} + {} = ".format(numero1, numero2))
+        print(numero1 + numero2)
+        again()
+    elif operation == "-":
+        numero1 = float(input('Escreva o primeiro número: '))
+        numero2 = float(input('Escreva o segundo número: '))
+        print('{} - {} = '.format(numero1, numero2))
+        print(numero1 - numero2)
+        again()
+    elif operation == "*":
+        numero1 = float(input('Escreva o primeiro número: '))
+        numero2 = float(input('Escreva o segundo número: '))
+        print("{} * {} = ".format(numero1, numero2))
+        print(numero1 * numero2)
+        again()
+    elif operation == "/":
+        numero1 = float(input('Escreva o primeiro número: '))
+        numero2 = float(input('Escreva o segundo número: '))
+        print('{} / {} = '.format(numero1, numero2))
+        print(numero1 / numero2)
+        again()
+    else:
+        print("Você não digitou um valor válido")
+    again()
+
+
+def again():
+    calcagain = input('''Você deseja calcular de novo?
+    
+    y para sim e n para não.''')
+    if calcagain == "y":
+        calcular()
+    if calcagain == "n":
+        print("Até mais.")
+    else:
+        again()
+
+
+def areas():
+    operationtwo = input('''Escolha a forma geométrica que queira calcular a área:
+    ====================================
+    Q para quadriláteros;
+    T para triângulos;
+    C para circunferências;
+    T2 para trapézios;
+    prox para nenhuma das anteriores.
+    ====================================
+    ''')
+    if operationtwo == "prox":
+        funcoesqmc()
+    if operationtwo == "Q":
+        numero1 = float(input('Escreva o primeiro número: '))
+        numero2 = float(input('Escreva o segundo número: '))
+        print("{} * {} = ".format(numero1, numero2))
+        print(numero1 * numero2)
+        again()
+    elif operationtwo == "T":
+        numero1 = float(input('Escreva o primeiro número: '))
+        numero2 = float(input('Escreva o segundo número: '))
+        print("({} * {})/2 = ".format(numero1, numero2))
+        print(numero1 * numero2 / 2)
+        again()
+    elif operationtwo == "C":
+        numero1 = float(input("Escreva o primeiro número: "))
+        print("pi * {} ** 2 = ".format(numero1))
+        print(numero1 ** 2 * 3.14159265359)
+        again()
+    elif operationtwo == "T2":
+        numero1 = float(input("Escreva a base maior: "))
+        numero2 = float(input("Escreva a base menor: "))
+        numero3 = float(input("Escreva a altura: "))
+        print("({} + {}) * {} = ".format(numero1, numero2, numero3))
+        print(((numero1 + numero2) * numero3) / 2)
+        again()
+    else:
+        print("Você não digitou um valor válido")
+    again()
+
+
+def funcoesqmc():
+    operationthree = input('''Escolha o que deseja calcular:
+    ====================================
+    pH para calcular pH sabendo a concentração;
+    dO para calcular a diluição de Ostwald sabendo a molaridade e o grau de ionização;
+    gI para calcular o grau de ionização sabendo a constante de ionização e a molaridade;
+    Mi para calcular a molaridade sabendo a constante de ionização e o grau de ionização;
+    prox para nenhuma das anteriores.
+    ====================================
+    ''')
+    if operationthree == "pH":
+        numero1 = float(input("Escreva a concentração: "))
+        print("-log[{}] = ".format(numero1))
+        print(-math.log10(numero1))
+        again()
+    elif operationthree == "dO":
+        numero1 = float(input("Escreva a molaridade: "))
+        numero2 = float(input("Escreva o grau de ionização: "))
+        print("{} * {} ** 2 = ".format(numero1, numero2))
+        print(numero1 * numero2 ** 2)
+        again()
+    elif operationthree == "gI":
+        numero1 = float(input("Escreva a constante de ionização: "))
+        numero2 = float(input("Escreva a molaridade: "))
+        print("sqrt({} / {}) = ".format(numero1, numero2))
+        print((numero1 / numero2) ** 0.5)
+        again()
+    elif operationthree == "Mi":
+        numero1 = float(input("Escreva a constante de ionização: "))
+        numero2 = float(input("Escreva o grau de ionização: "))
+        print("{} / ({} ** 2) = ".format(numero1, numero2))
+        print(numero1 / (numero2 ** 2))
+        again()
+    elif operationthree == "prox":
+        funcoesfsc()
+    else:
+        print("Você não digitou um valor válido")
+    again()
+
+
+def funcoesfsc():
+    operationfour = input('''Escolha o que deseja calcular: 
+    ====================================
+    V para calcular velocidade;
+    Fr para calcular força resultante;
+    Q para calcular quantidade de calor (envolvendo calor específico);
+    Q2 para calcular quantidade de calor (envolvendo calor latente);
+    P para calcular pressão;
+    U para calcular diferença de potencial elétrico;
+    E para calcular o campo elétrico;
+    Q3 para calcular carga elétrica;
+    t para calcular trabalho;
+    E2 para calcular empuxo;
+    V2 para calcular velocidade de ondas;
+    d para calcular distância.
+    =====================================
+    ''')
+    if operationfour == "V":
+        numero1 = float(input("Escreva a variação do espaço: "))
+        numero2 = float(input("Escreva a variação do tempo: "))
+        print("{} / {} = ".format(numero1, numero2))
+        print(numero1 / numero2)
+        again()
+    elif operationfour == "Fr":
+        numero1 = float(input("Escreva a massa: "))
+        numero2 = float(input("Escreva a aceleração: "))
+        print("{} * {} = ".format(numero1, numero2))
+        print(numero1 * numero2)
+        again()
+    elif operationfour == "Q":
+        numero1 = float(input("Escreva a massa: "))
+        numero2 = float(input("Escreva o calor específico: "))
+        numero3 = float(input("Escreva a variação de temperatura: "))
+        print("{} * {} * {} = ".format(numero1, numero2, numero3))
+        print(numero1 * numero2 * numero3)
+        again()
+    elif operationfour == "Q2":
+        numero1 = float(input("Escreva a massa: "))
+        numero2 = float(input("Escreva o calor latente: "))
+        print("{} * {} = ".format(numero1, numero2))
+        print(numero1 * numero2)
+        again()
+    elif operationfour == "P":
+        numero3 = float(input("Escreva o volume: "))
+        numero2 = float(input("Escreva o número de mols: "))
+        numero1 = float(input("Escreva a temperatura: "))
+        print("({} * {} * R)/{} = ".format(numero1, numero2, numero3))
+        print((numero1 * numero2 * 8.3145) / numero3)
+        again()
+    elif operationfour == "U":
+        numero1 = float(input("Escreva a resistência elétrica: "))
+        numero2 = float(input("Escreva a intensidade da corrente elétrica: "))
+        print("{} * {} = ".format(numero1, numero2))
+        print(numero1 * numero2)
+        again()
+    elif operationfour == "E":
+        numero1 = float(input("Escreva a força: "))
+        numero2 = float(input("Escreva a carga da prova: "))
+        print("{} / {} = ".format(numero1, numero2))
+        print(numero1 / numero2)
+        again()
+    elif operationfour == "Q3":
+        numero1 = float(input("Escreva o tempo: "))
+        numero2 = float(input("Escreva a corrente"))
+        print("{} * {} = ".format(numero1, numero2))
+        print(numero1 * numero2)
+        again()
+    elif operationfour == "t":
+        numero1 = float(input("Escreva a força: "))
+        numero2 = float(input("Escreva o deslocamento: "))
+        print("{} * {} = ".format(numero1, numero2))
+        print(numero1 * numero2)
+        again()
+    elif operationfour == "E2":
+        numero1 = float(input("Escreva a densidade: "))
+        numero2 = float(input("Escreva o volume deslocado: "))
+        numero3 = float(input("Escreva a aceleração da gravidade: "))
+        print("{} * {} * {} = ".format(numero1, numero2, numero3))
+        print(numero1 * numero2 * numero3)
+        again()
+    elif operationfour == "V2":
+        numero1 = float(input("Escreva o valor de lambda: "))
+        numero2 = float(input("Escreva a frequência de onda: "))
+        print("{} * {} = ".format(numero1, numero2))
+        print(numero1 * numero2)
+        again()
+    elif operationfour == "d":
+        numero1 = float(input("Escreva a velocidade: "))
+        numero2 = float(input("Escreva o tempo: "))
+        print("{} * {} = ".format(numero1, numero2))
+        print(numero1 * numero2)
+        again()
+    else:
+        print("Você não digitou um valor válido")
+    again()
+
+
+calcular()

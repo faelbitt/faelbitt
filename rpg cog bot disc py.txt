@@ -1,0 +1,56 @@
+import discord
+from discord.ext import commands
+
+
+class RpgCog(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command()
+    async def querojogar(self, ctx):
+        await ctx.send("Em qual país vai se passar a história? (#japao, #canada, #italia)")
+
+    @commands.command()
+    async def japao(self, ctx):
+        await ctx.send('''É uma tarde chuvosa em Osaka, você chega do trabalho e vai direto para o seu quarto jogar com seus amigos, por causa da pandemia faz tempo que não se veem pessoalmente mas estão sempre juntos no melhor servidor do discord O Comando Da Meia-Noite, obviamente.''')
+        await ctx.send('''Seu amigo lhe perguntas como foi seu dia e se você quer se divertir jogando um mine.''')
+        await ctx.send('''O que você responde? (#medivertir , #foibom)''')
+
+    @commands.command()
+    async def medivertir(self, ctx):
+        await ctx.send('''<Você> Me divertir? Me divertir? Você acha que eu jogo pra me divertir?''')
+        await ctx.send('''<Você> SE EU QUISESSE ME DIVERTIR EU TAVA NA PRAIA CATANDO TATU!''')
+        await ctx.send('''Nesse momento você sente um terremoto e seu pc desliga, sua internet cai e o mesmo ocorre em toda cidade de Osaka''')
+        await ctx.send('''Você sai correndo na rua e vê todos os postes que tinham a recém acendido, estavam apagados.''')
+        await ctx.send('''Você pega o celular e vai ver o que houve ou fica em casa? (#vai, #fica)''')
+
+    @commands.command()
+    async def foibom(self, ctx):
+        await ctx.send('''<Você> Vamo jogar um minescrafs bro.''')
+        await ctx.send('''Nesse momento você sente um terremoto e seu pc desliga, sua internet cai e o mesmo ocorre em toda cidade de Osaka.''')
+        await ctx.send('''Você sai correndo na rua e vê todos os postes que tinham a recém acendido, estavam apagados.''')
+        await ctx.send('''Você pega o celular e vai ver o que houve ou fica em casa? (#vai, #fica)''')
+
+    @commands.command()
+    async def canada(self, ctx):
+        await ctx.send('''Vancouver, 12 de outubro, 13h, você chega da faculdade e deita no sofá vendo memes no melhor servidor do discord O Comando Da Meia-Noite.''')
+        await ctx.send('''Você fica lá até umas 15h até que seu amigo lhe chama para testar um novo bot do discord, o Robozinho do fulano...''')
+        await ctx.send('''Uhmm, que nome familiar, bom continuando, esse robozinho pareceu legal mas você quer mesmo é ver algo diferente.''')
+        await ctx.send('''Seu amigo lhe pergunta o que achou do bot, o que você responde? (#legal, #ordinario)''')
+
+    @commands.command()
+    async def legal(self, ctx):
+        await ctx.send('''<Amigo> EU SEI NÉ? Fiquei 15  minutos fazendo, eu achei que ficou ótimo!''')
+        await ctx.send('''<Você> É... ótimo.''')
+        await ctx.send('''Nesse momento você escuta o telefone fixo tocando e vai atender.''')
+        await ctx.send('''<Telefone> Alô? crrrr alguém escu- crrrr precis- aju- crrr''')
+        await ctx.send('''<Você> Que estranho, eu deveria ajudar?''')
+
+    @commands.command()
+    async def ordinario(self, ctx):
+        await ctx.send('''<Amigo> Ah, eu tinha gostado, mas talvez você tenha razão, eu vou trabalhar um pouco mais nele.''')
+        await ctx.send('''<Você> Não me leve a mal, mas parece que todos os bots fazem a mesma coisa hoje em dia.''')
+        await ctx.send('''<Você> Por que você não tenta fazer um bot de música? Eu nunca vi um desses.''')
+        await ctx.send('''Nesse momento você escuta o telefone fixo tocando e vai atender.''')
+        await ctx.send('''<Telefone> Alô? crrrr alguém escu- crrrr precis- aju- crrr''')
+        await ctx.send('''<Você> Que estranho, eu deveria ajudar?''')

@@ -1,0 +1,162 @@
+## OCN7027 - ANALISE DE DADOS OCEANOGRÁFICOS - 2021
+# Profa. Carla Bonetti
+
+#PRATICA: CORRELAÇÃO E REGRESSÃO LINEAR
+
+install.packages("devtools")
+install.packages("ggplot2")    #usado para construir gráficos
+install.packages("ggpubr")      #associado ao ggplot - representações graficas (Diagramas de dispersão)
+install.packages("dplyr")       #calcula estatisticas por grupos + ferramenta %>%
+
+install.packages("tidyverse")   # manipulação e visualização de dados - regressão
+install.packages("broom")       # gera data frame com os resultados da regressão
+install.packages("ggfortify")   # gera gráficos de residuos
+install.packages("corrplot")    # matrizes graficas de correlação
+
+library(devtools)
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+
+library(tidyverse)
+library(broom)
+library(ggfortify)
+library(corrplot)
+
+
+setwd("C:/Users/rafae/PycharmProjects/untitled")
+getwd()
+
+
+df <-read.csv2("Pratica_CorReg_26ago.csv")
+
+
+#Observando dataframe
+str(df)
+head(df)
+names(df)
+summary(df)
+
+
+#TESTES DE NORMALIDADE
+shapiro.test(df$VARD)
+
+#DIAGRAMA DE DISPERSÃO
+ggscatter(df, x = "VARA", y = "VARB",
+          xlab = " VARIAVEL A", ylab = "VARIAVEL B")
+
+
+# CORRELAÇÃO DE PEARSON
+r <- cor.test(df$VARA, df$VARD, method=c("pearson"))  #OPCIONAL ("kendall", "spearman")
+r
+
+#COEFICIENTE DE DETERMINAÇÃO (R2)
+R2 <- cor(df$VARA, df$VARB)^2
+R2
+
+#DIAGRAMA DE DISPERSÃO COM RESULTADO DA ANALISE DE CORRELAÇÃO
+ggscatter(df, x = "VARA", y = "VARB",
+          add = "reg.line", conf.int = FALSE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = " VARIAVEL A", ylab = "VARIAVEL B")
+
+
+# MATRIZ GRAFICA DE CORRELAÇÃO (varios diagramas de dispersão ao mesmo tempo)
+
+cor(df[,2:5], method = 'pearson') # OU method = 'spearman'
+plot(df[,2:5], col = 1, pch = 19)
+
+#OU (matriz de correlação multipla)
+corrplot(cor(df[,2:5,], method ='pearson'), type = "lower",              #ou upper oo full
+         method = c("number"), tl.col = "black", number.digits = 1)
+
+
+## REGRESSÃO LINEAR SIMPLES
+
+  # definir variável dependente (eixo Y) e independente (eixo x)
+model <- lm(VARB ~ VARA, data = df) # Var dependente ~ var independente
+
+summary(model)
+
+# Interpretando a saida dos dados:
+# Estimate (intercep)= coef a; Estimate (VARIAVEL) = coef b
+# Std.Error: o erro padrão das estimativas dos coeficientes. (Isso representa a precisão dos coeficientes (qto maior o erro padrão, menor a confiança na estimativa)
+# t value: resultado do teste t (significância dos coeficientes da equação da reta)
+# Pr (> | t |): O valor p correspondente à estatística t.
+# Residual standard error (RSE): erro de predição ou resíduo (diferença média entre observado e previsto).
+# Multiple R-squared: coeficiente de Determinação
+# Adjusted R-squared:  coeficiente de Determinação ajustado à multiplas variáveis
+# F-statistic: razão F para verificação do ajuste da equação da reta e valor de p associado a distribuição F
+
+# ESCREVER A EQUAÇÃO DA RETA - EXEMPLO VARB = 1,5+0,12*VARA
+
+# Predição (estimar valor de Y usando a equação da reta)   y = A + B*X
+prev1 <- data.frame(VARA = c(30))   # prever valor da váriavel VARB qdo VARA for 30
+model %>% predict(prev1)
+
+###ANÁLISE DOS RESÍDUOS  (pacote Broom)
+
+model.diag.metrics <- augment(model)   #cria um dataframe com as estatisticas da regressão
+
+head(model.diag.metrics)
+
+#significado das métricas
+#.fitted: valores ajustados
+#.resid: resíduos
+#.hat: valores usados para detectar pontos de alta alavancagem (leverage) (influencia de valores extremos)
+#.cooksd: distância de Cook, usada para detectar valores influentes (outlier, leverage)
+#.std.resid: resíduos padronizados(pode ser usado para detectar outliers)
+
+# testar a normalidade dos residuos
+shapiro.test(model.diag.metrics$.resid)
+
+#Grafico de distribuição dos residuos padrão
+plot(x = model.diag.metrics$VARB,
+     y = model.diag.metrics$.std.resid,
+     ylim = c(-3, 3),
+     pch = 16,
+     col = "black",
+     xlab = "valores observados", ylab = "resíduos padronizados")
+abline(0, 0)
+abline(2, 0)
+abline(-2, 0)
+
+
+# REGRESSÃO MULTIPLA
+model.rm <- lm(VARB ~ VARA + VARC,
+               data = df)
+summary(model.rm)
+
+
+# Analise dos Resíduos
+
+model.diag.metrics.rm <- augment(model.rm)   #cria um data frame com as estatisticas da regressão
+
+model.diag.metrics.rm
+
+##Grafico de distribuição dos residuos padrão
+
+plot(x = model.diag.metrics.rm$VARB,
+     y = model.diag.metrics.rm$.std.resid,
+     ylim = c(-3, 3),
+     pch = 16,
+     col = "black",
+     xlab = "valores observados", ylab = "resíduos padronizados")
+abline(0, 0)
+abline(2, 0)
+abline(-2, 0)
+
+
+
+
+# salvar todo o ambiente de trabalho
+save.image() #ou
+save.image(file = "Pratica_CorReg_26ago.RData")
+
+#Carregando arquivos salvos
+load("teste.RData")
+
+#REFERENCIAS
+#http://www.sthda.com/english/wiki/correlation-test-between-two-variables-in-r
+#http://www.sthda.com/english/articles/40-regression-analysis/165-linear-regression-essentials-in-r
+# http://www.sthda.com/english/articles/39-regression-model-diagnostics/161-linear-regression-assumptions-and-diagnostics-in-r-essentials

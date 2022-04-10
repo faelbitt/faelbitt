@@ -1,0 +1,108 @@
+import discord
+from discord.ext import commands
+import math
+
+
+class CalcCog(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command()
+    async def soma(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) + float(numero2))
+
+    @commands.command()
+    async def subt(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) - float(numero2))
+
+    @commands.command()
+    async def mult(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2))
+
+    @commands.command()
+    async def divi(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) / float(numero2))
+
+    @commands.command()
+    async def pote(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) ** float(numero2))
+
+    @commands.command()
+    async def raiz(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) ** 1/numero2)
+
+    @commands.command()
+    async def triangulo(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2) / 2)
+
+    @commands.command()
+    async def trapezio(self, ctx, numero1, numero2, numero3):
+        await ctx.send((((float(numero1) + float(numero2)) + float(numero3))) / 2)
+
+    @commands.command()
+    async def circ(self, ctx, numero1):
+        await ctx.send((float(numero1) ** 2) * 3.14159265359)
+
+    @commands.command()
+    async def ph(self, ctx, numero1):
+        await ctx.send(-math.log10(float(numero1)))
+
+    @commands.command()
+    async def dil(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2) ** 2)
+
+    @commands.command()
+    async def grau(self, ctx, numero1, numero2):
+        await ctx.send((float(numero1) / float(numero2)) ** 0.5)
+
+    @commands.command()
+    async def molaridade(self, ctx, numero1, numero2):
+        await ctx.send((float(numero1) / float(numero2)) ** 2)
+
+    @commands.command()
+    async def vel(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) / float(numero2))
+
+    @commands.command()
+    async def forca(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2))
+
+    @commands.command()
+    async def qc(self, ctx, numero1, numero2, numero3):
+        await ctx.send(float(numero1) * float(numero2) * float(numero3))
+
+    @commands.command()
+    async def q2(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2))
+
+    @commands.command()
+    async def pressao(self, ctx, numero1, numero2, numero3):
+        await ctx.send((float(numero1) * float(numero2) * 8.3145) / float(numero3))
+
+    @commands.command()
+    async def u(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2))
+
+    @commands.command()
+    async def campo(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) / float(numero2))
+
+    @commands.command()
+    async def carga(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2))
+
+    @commands.command()
+    async def trabalho(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2))
+
+    @commands.command()
+    async def empuxo(self, ctx, numero1, numero2, numero3):
+        await ctx.send(float(numero1) * float(numero2) * float(numero3))
+
+    @commands.command()
+    async def vel2(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2))
+
+    @commands.command()
+    async def distancia(self, ctx, numero1, numero2):
+        await ctx.send(float(numero1) * float(numero2))

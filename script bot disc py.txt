@@ -1,0 +1,260 @@
+import random
+import asyncio
+import discord
+from discord import FFmpegPCMAudio
+from discord.ext import commands
+from music_cog import MusicCog
+from rpg_cog import RpgCog
+from calculadora_cog import CalcCog
+
+client = commands.Bot(command_prefix="#", case_insensitive=True)    # define o prefixo dos comandos do bot
+
+client.add_cog(MusicCog(client))
+client.add_cog(RpgCog(client))
+client.add_cog(CalcCog(client))
+
+'''====================================Comandos de texto==========================================================='''
+
+
+@client.event   # define um comando só para o cmd pra avisar que o bot está online
+async def on_ready():
+    print('To on família {0.user}' .format(client))
+
+
+@client.command()   # define um comando assincrono de texto
+async def comandos(ctx):
+    embed = discord.Embed(title="Comandos do Robozinho", color=discord.Color.purple())
+    embed.add_field(name="Comandos de Texto", value="```#ping``` ```#pong``` ```#dado``` ```#greg``` ```#rafa``` ```#lice``` ```#gabs``` ```#rau``` ```#lucca``` ```#shel``` ```#amongus```")
+    embed.add_field(name="Comandos de Áudio", value="```#rapaz``` ```#ajudayoda``` ```#calaboca``` ```#sucumba``` ```#denovo``` ```#vadia``` ```#armando``` ```#pravencer``` ```#soumjogo``` ```#divertir``` ```#muleke``` ```#casual```")
+    embed.add_field(name="Comandos de Música", value="```#p (música)``` ```#q (exibe a fila de músicas)``` ```#skip (pula a música atual)``` ```#desconecte (desconecta o robozinho da call)```")
+    embed.add_field(name="Calculadora básica", value="```#soma <numero1> <numero2> (soma)``` ```#subt <numero1> <numero2>``` ```#multi <numero1> <numero2> (multiplicação)``` ```#divi <dividendo> <divisor> (divisão)``` ```#pote <base> <expoente> (potenciação)``` ```#raiz <radicando> <índice> (raiz)```")
+    embed.add_field(name="Calculadora de área", value="```#triangulo <base> <altura>``` ```#trapezio <base maior> <base menor> <altura>``` ```#circ <raio> (circunferência)```")
+    embed.add_field(name="Calculadora química", value="```#ph <concentração>``` ```#dil <molaridade> <grau de ionização> (diluição de Ostwald)``` ```#grau <constante de ionização> <molaridade> (grau de ionização)``` ```#molaridade <constante de ionização> <grau de ionização>```")
+    embed.add_field(name="Calculadora física", value="```#vel <distância> <tempo> (velocidade)``` ```#forca <massa> <aceleração>``` ```#qc <massa> <calor específico> <temperatura> (quantidade de calor)``` ```#q2 <massa> <calor latente> (quantidade de calor)``` ```#pressao <volume> <número de mols> <temperatura>``` ```#u <resistência elétrica> <corrente elétrica> (potencial elétrico)``` ```#campo <força> <carga da prova> (campo elétrico)``` ```#carga <tempo> <corrente> (carga elétrica)``` ```#trabalho <força> <deslocamento>``` ```#empuxo <densidade> <volume deslocado> <gravidade>``` ```#vel2 <lambda> <frequência de onda> (velocidade de onda)``` ```#distancia <velocidade> <tempo>```")
+    embed.set_footer(text="Informação pedida por: {}".format(ctx.author.display_name))
+    await ctx.send(embed=embed)
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def ping(ctx):
+    await ctx.send(f'pong')
+
+
+@client.command()   # define um comando assincrono onde o bot retorna ao usuario um numero aleatorio de 1 ao numero qu escolheu
+async def dado(ctx, numero):
+    variavel = random.randint(1, int(numero))
+    await ctx.send(f'O número que saiu no dado é: {variavel}')
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def greg(ctx):
+    await ctx.send(f'greg')
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def rafa(ctx):
+    await ctx.send(f'rafa')
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def shel(ctx):
+    await ctx.send(f'shel')
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def lice(ctx):
+    await ctx.send(f'lice')
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def gabs(ctx):
+    await ctx.send(f'gabs')
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def rau(ctx):
+    await ctx.send(f'rau')
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def lucca(ctx):
+    await ctx.send(f'lucca')
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def pong(ctx):
+    await ctx.send(f'ping')
+
+
+@client.command()   # define um comando assincrono de resposta ao usuario
+async def amongus(ctx):
+    await ctx.send(f'''
+⣿⣿⣿⣿⣿⣿⣿⢿⠟⠛⠿⠻⠿⠿⠟⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⡿⠛⢙⣨⣥⣶⣶⣿⢿⣿⣿⣷⣦⣅⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⠟⢀⡴⠟⠋⢉⣀⣠⣤⣤⣤⣀⠉⠻⣿⣧⡈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⠀⠁⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣷⠀⢻⣿⣇⠝⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⡀⣼⡿⠟⠀⠙⣛⣬⠱⣿⣿⣿⣿⣿⣿
+⣿⣿⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⢀⠄⠁⣠⣶⣾⣿⣿⣿⡆⣼⣿⣿⣿⣿⣿
+⣿⣿⠀⣀⠙⣛⣛⣻⠛⠋⣉⣢⣤⣾⠃⣰⡄⠸⣿⣿⣿⣿⣿⣷⠘⣿⣿⣿⣿⣿
+⣿⣿⣤⢹⣷⣶⣶⣶⣾⣿⣿⣿⣿⣿⡄⠸⣷⠀⢻⣿⣿⡿⠟⠛⠡⣿⣿⣿⣿⣿
+⣿⣿⣿⠄⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠄⠻⠇⢈⠁⠀⠀⠲⠠⠞⠿⣿⣿⣿⣿
+⣿⣿⣿⣷⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⢤⠀⠀⢲⣿⣿⣿⣷⣤⡉⣻⣿⣿
+⣿⣿⣿⣿⣧⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣳⡀⢻⣿⣿⣿⣿⣷⠐⣿⣿
+⣿⣿⣿⣿⣿⣯⡈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⡇⡆⣿⣿⣿⣿⡟⣀⣿⣿
+⣿⣿⣿⣿⣿⣿⣷⡀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⢃⡿⠿⠛⡋⣀⣾⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣷⣀⠹⣿⣿⣿⣿⣿⣿⣿⠿⠋⢁⣠⣿⡦⠐⠀⢈⡙⢿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⠋⢀⣿⣿⣿⣿⠟⢃⣤⣤⡀⠻⣿⣇⣠⣴⡿⠄⠹⣧⡸⣿
+⣿⣿⣿⣿⣿⣿⡿⠃⢠⣾⣿⣿⡿⢋⣤⣿⣿⣿⣿⣄⠈⢿⡿⠋⣠⣤⣀⠈⣡⣿
+⣿⣿⣿⠅⣀⣈⠁⣰⣿⣿⡿⠋⣤⣾⣿⣿⣿⣿⣿⣿⣷⣵⣂⣽⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣄⠘⢿⣿⣿⠟⠋⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣷⣤⣬⣅⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿''')
+
+
+'''====================================Comandos de audio==========================================================='''
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def rapaz(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('rapaz.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(2)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def ajudayoda(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('AJUDA_YODA.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(14)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def calaboca(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('cala_a_boca.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(4)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def sucumba(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('sucumba.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(4)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def denovo(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('tu-ta-aqui-de-novo-menor.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(6)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def vadia(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('put-vadi.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(29)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def armando(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('seu-armando-oficial.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(73)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def muleke(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('muleke.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(3)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def divertir(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('divertir.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(13)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def soumjogo(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('ésóumjogo.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(7)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def casual(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('jogadorcasual.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(9)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def pravencer(ctx):
+    if ctx.author.voice:
+        channel = ctx.message.author.voice.channel
+        voice = await channel.connect()
+        source = FFmpegPCMAudio('jogopravencer.mp3')
+        player = voice.play(source)
+        await asyncio.sleep(7)
+        await ctx.guild.voice_client.disconnect()
+
+
+@client.command(pass_context=True)  # define um comando assincrono onde o bot vai reproduzir um arquivo de audio
+async def desconecte(ctx):
+    if ctx.voice_client:
+        await ctx.guild.voice_client.disconnect()
+        await ctx.send("Saí da call.")
+    else:
+        await ctx.send("Não estou em uma call.")
+
+
+'''================================================================================================================'''
+
+
+client.run('ODc0ODIxMjk3MTQ0NzQ2MDA1.YRMi0g.rkGjySd_X-tF86cu_bHFiu3t2oA')

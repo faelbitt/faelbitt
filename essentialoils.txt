@@ -1,0 +1,265 @@
+from PySimpleGUI import PySimpleGUI as sg
+
+
+# layout
+sg.theme('Default1')
+layout = [
+    [sg.Text('Consulta'), sg.Input(key='consulta')],
+    [sg.Button('Pesquisar')]
+]
+
+# janela
+janela = sg.Window('Consulta de Produtos', layout)
+
+# eventos
+while True:
+    eventos, valores = janela.read()
+    if eventos == sg.WINDOW_CLOSED:
+        break
+    if eventos == 'Pesquisar':
+        if valores['consulta'] == 'bergamota':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 164,00
+            Preço de venda: R$ 219,00
+            Lucro líquido: R$ 55,00''')
+        if valores['consulta'] == 'citronela':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 68,00
+            Preço de venda: R$ 91,00
+            Lucro líquido: R$ 23,00''')
+        if valores['consulta'] == 'copaiba':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 197,00
+            Preço de venda: R$ 293,00
+            Lucro líquido: R$ 96,00
+            
+            5ml
+            Preço de compra: R$ 91,00
+            Preço de venda: R$ 121,00
+            Lucro líquido: R$ 30,00
+            ''')
+        if valores['consulta'] == 'eucalipto':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 86,00
+            Preço de venda: R$ 115,00
+            Lucro líquido: R$ 29,00
+            ''')
+        if valores['consulta'] == 'olibano':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 349,00
+            Preço de venda: R$ 465,00
+            Lucro líquido: R$ 116,00
+            
+            5ml
+            Preço de compra: R$ 149,00
+            Preço de venda: R$ 199,00
+            Lucro líquido: R$ 50,00
+            ''')
+        if valores['consulta'] == 'geranio':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 175,00
+            Preço de venda: R$ 233,00
+            Lucro líquido: R$ 58,00
+            ''')
+        if valores['consulta'] == 'lavanda':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 130,00
+            Preço de venda: R$ 176,00
+            Lucro líquido: R$ 46,00
+            
+            5ml
+            Preço de compra: R$ 57,00
+            Preço de venda: R$ 76,00
+            Lucro líquido: R$ 19,00
+            
+            Roll-on 10ml
+            Preço de compra: R$ 86,00
+            Preço de venda: R$ 115,00
+            Lucro líquido: R$ 29,00
+            ''')
+        if valores['consulta'] == 'lemon':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 63,00
+            Preço de venda: R$ 84,00
+            Lucro líquido: R$ 21,00
+            
+            5ml
+            Preço de compra: R$ 28,00
+            Preço de venda: R$ 37,00
+            Lucro líquido: R$ 9,00
+            ''')
+        if valores['consulta'] == 'lemon grass':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 59,00
+            Preço de venda: R$ 79,00
+            Lucro líquido: R$ 20,00
+            
+            5ml
+            Preço de compra: R$ 23,00
+            Preço de venda: R$ 31,00
+            Lucro líquido: R$ 8,00
+            ''')
+        if valores['consulta'] == 'on guard':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 176,00
+            Preço de venda: R$ 235,00
+            Lucro líquido: R$ 59,00
+            ''')
+        if valores['consulta'] == 'melaleuca':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 108,00
+            Preço de venda: R$ 144,00
+            Lucro líquido: R$ 36,00
+            
+            Roll-on 10ml
+            Preço de compra: R$ 73,00
+            Preço de venda: R$ 97,00
+            Lucro líquido: R$ 24,00
+            ''')
+        if valores['consulta'] == 'mirra':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 359,00
+            Preço de venda: R$ 479,00
+            Lucro líquido: R$ 120,00
+            ''')
+        if valores['consulta'] == 'pepper mint':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 119,00
+            Preço de venda: R$ 159,00
+            Lucro líquido: R$ 40,00
+            
+            5ml
+            Preço de compra: R$ 49,00
+            Preço de venda: R$ 65,00
+            Lucro líquido: R$ 16,00
+            ''')
+        if valores['consulta'] == 'alecrim':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 91,00
+            Preço de venda: R$ 121,00
+            Lucro líquido: R$ 30,00
+            ''')
+        if valores['consulta'] == 'siberian fir':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 94,00
+            Preço de venda: R$ 125,00
+            Lucro líquido: R$ 31,00
+            ''')
+        if valores['consulta'] == 'tangerina':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 85,00
+            Preço de venda: R$ 113,00
+            Lucro líquido: R$ 28,00
+            
+            5ml
+            Preço de compra: R$ 39,00
+            Preço de venda: R$ 52,00
+            Lucro líquido: R$ 13,00
+            ''')
+        if valores['consulta'] == 'vetiver':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 281,00
+            Preço de venda: R$ 375,00
+            Lucro líquido: R$ 94,00
+            ''')
+        if valores['consulta'] == 'wild orange':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 63,00
+            Preço de venda: R$ 84,00
+            Lucro líquido: R$ 21,00
+            
+            5ml
+            Preço de compra: R$ 24,00
+            Preço de venda: R$ 32,00
+            Lucro líquido: R$ 8,00
+            ''')
+        if valores['consulta'] == 'ylang ylang':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 203,00
+            Preço de venda: R$ 271,00
+            Lucro líquido: R$ 68,00
+            ''')
+        if valores['consulta'] == 'turmeric':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 160,00
+            Preço de venda: R$ 213,00
+            Lucro líquido: R$ 53,00
+            ''')
+        if valores['consulta'] == 'zengest':
+            sg.popup('''
+            5ml
+            Preço de compra: R$ 68,00
+            Preço de venda: R$ 91,00
+            Lucro líquido: R$ 23,00
+            ''')
+        if valores['consulta'] == 'clarycalm':
+            sg.popup('''
+            Roll-on 10ml
+            Preço de compra: R$ 160,00
+            Preço de venda: R$ 213,00
+            Lucro líquido: R$ 53,00
+            ''')
+        if valores['consulta'] == 'deep blue':
+            sg.popup('''
+            5ml
+            Preço de compra: R$ 168,00
+            Preço de venda: R$ 224,00
+            Lucro líquido: R$ 56,00
+            ''')
+        if valores['consulta'] == 'thinker':
+            sg.popup('''
+            Roll-on 10ml
+            Preço de compra: R$ 88,00
+            Preço de venda: R$ 117,00
+            Lucro líquido: R$ 29,00
+            ''')
+        if valores['consulta'] == 'balance':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 101,00
+            Preço de venda: R$ 135,00
+            Lucro líquido: R$ 34,00
+            ''')
+        if valores['consulta'] == 'breathe':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 123,00
+            Preço de venda: R$ 164,00
+            Lucro líquido: R$ 41,00
+            ''')
+        if valores['consulta'] == 'smart & sassy':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 150,00
+            Preço de venda: R$ 200,00
+            Lucro líquido: R$ 50,00
+            ''')
+        if valores['consulta'] == 'zendocrine':
+            sg.popup('''
+            15ml
+            Preço de compra: R$ 148,00
+            Preço de venda: R$ 197,00
+            Lucro líquido: R$ 49,00
+            ''')
+        else:
+            sg.popup('Nenhum produto encontrado na busca.')
